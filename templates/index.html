@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>GPS Tracking</title>
+        <link rel="stylesheet" type="text/css" href="../static/style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1> GPS Tracking</h1>
+        </header>
+
+        <div id="wrapper">
+            <section id="upper">
+                <form action="/eingabe" method="POST">
+                    <div id="leftblock">
+                        <label class="left" for="name">Initalien:</label>
+                        <input class="left" type="text" name="nick" placeholder="Name" required>
+
+                        <label class="left" for="kfz">KFZ-Kennzeichen:</label>
+                        <input class="left" type="text" name="kfz" placeholder="KFZ-Kennzeichen" required>
+                    </div>
+
+                    <div id="rightblock">
+                        <label class="right" for="datefrom">Datum 'von':</label>
+                        <input class="right" type="date" name="datefrom" placeholder="Datum von" required/>
+
+                        <label class="right" for="dateto">Datum 'bis':</label>
+                        <input class="right" type="date" name="dateto" placeholder="Datum bis" required/>
+                    </div>
+                    <button type="submit">Suchen</button>
+                </form>
+            </section>
+
+            <section id="lower">
+
+            </section>
+        </div>
+        
+    </body>
+
+</html>

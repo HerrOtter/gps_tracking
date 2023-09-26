@@ -79,6 +79,18 @@ input.right {
     margin: 0 1.15rem 0 0.5rem;
 }
 
+#buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom: 2rem;
+}
+
+#buttons button {
+    margin-right: 1rem
+}
+
 #upper button {
     font-size: 1.25rem;
     padding: 0.25rem 2.5rem;
@@ -90,4 +102,13 @@ input.right {
 
 #upper button:hover {
     background-color: #0077ED;
+}
+
+
+#lower {
+    min-height: 300px; /* Mindesthöhe für die "Lower" Section festlegen */
+}
+
+#map {
+    height: 100%; /* Hinzugefügt */
 }

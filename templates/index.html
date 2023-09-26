@@ -4,6 +4,9 @@
     <head>
         <title>GPS Tracking</title>
         <link rel="stylesheet" type="text/css" href="../static/style.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
     </head>
 
     <body>
@@ -29,15 +32,46 @@
                         <label class="right" for="dateto">Datum 'bis':</label>
                         <input class="right" type="date" name="dateto" placeholder="Datum bis" required/>
                     </div>
-                    <button type="submit">Suchen</button>
+                    <div id="buttons">
+                        <button type="submit">Suchen</button>
+                        <button type="reset">Eingabe Löschen</button>
+                        <button type="button" id="list-view-button">Listenansicht</button>
+                    </div>
+                    
                 </form>
             </section>
-
             <section id="lower">
-
+                <div id="map"></div>
             </section>
         </div>
+        <script>
+            // Funktion zur Initialisierung der Karte
+            function initializeMap() {
+                // Initialisiere die Karte in das "map"-Element
+                var map = L.map('map').setView([51.505, -0.09], 13); // Hier kannst du die Startposition und den Zoom festlegen
         
+                // Füge eine Kartenquelle hinzu (z. B. OpenStreetMap)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+        
+                // Hole die aktuelle Position des Benutzers (Geolokalisierung)
+                if ("geolocation" in navigator) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var lat = position.coords.latitude;
+                        var lon = position.coords.longitude;
+        
+                        // Füge einen Marker für die aktuelle Position hinzu
+                        L.marker([lat, lon]).addTo(map)
+                            .bindPopup('Ihre aktuelle Position')
+                            .openPopup();
+                    });
+                }
+            }
+        
+            // Rufe die Funktion zur Initialisierung der Karte auf, wenn das Dokument geladen ist
+            window.addEventListener('load', initializeMap);
+        </script>
     </body>
 
 </html>

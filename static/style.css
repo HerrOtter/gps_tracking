@@ -106,9 +106,9 @@ input.right {
 
 
 #lower {
-    min-height: 300px; /* Mindesthöhe für die "Lower" Section festlegen */
+    height: 31.8rem;
 }
 
 #map {
-    height: 100%; /* Hinzugefügt */
+    height: 100%;
 }

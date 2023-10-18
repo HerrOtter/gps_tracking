@@ -11,14 +11,10 @@ c = conn.cursor()
 # Create tables
 c.execute('''CREATE TABLE IF NOT EXISTS Person
              (id INTEGER PRIMARY KEY,
-             name TEXT,
-             email TEXT,
-             phone TEXT)''')
+             name TEXT)''')
 
 c.execute('''CREATE TABLE IF NOT EXISTS Fahrzeug
              (id INTEGER PRIMARY KEY,
-             marke TEXT,
-             modell TEXT,
              kennzeichen TEXT)''')
 
 c.execute('''CREATE TABLE IF NOT EXISTS Tracks
@@ -50,21 +46,19 @@ for filename in os.listdir('./data/gpx'):
             gpx = gpxpy.parse(gpx_file)
 
         # Extract person data
-        person_name = gpx.author_name
-        person_email = gpx.author_email
-        person_phone = gpx.author_link
+        filename_parts = filename.split("_")
+        if len(filename_parts) >= 3:
+            person_name = filename_parts[0]
 
         # Insert person data into Person table
-        c.execute("INSERT INTO Person (name, email, phone) VALUES (?, ?, ?)", (person_name, person_email, person_phone))
+        c.execute("INSERT INTO Person (name) VALUES (?)", (person_name,))
         person_id = c.lastrowid
 
         # Extract fahrzeug data
-        fahrzeug_marke = gpx.name
-        fahrzeug_modell = gpx.description
-        fahrzeug_kennzeichen = gpx.author_link
-
+        fahrzeug_kennzeichen = filename_parts[1]
+    
         # Insert fahrzeug data into Fahrzeug table
-        c.execute("INSERT INTO Fahrzeug (marke, modell, kennzeichen) VALUES (?, ?, ?)", (fahrzeug_marke, fahrzeug_modell, fahrzeug_kennzeichen))
+        c.execute("INSERT INTO Fahrzeug (kennzeichen) VALUES (?)", (fahrzeug_kennzeichen,))
         fahrzeug_id = c.lastrowid
 
         # Extract track data
@@ -81,20 +75,20 @@ for filename in os.listdir('./data/gpx'):
                     lat = point.latitude
                     lon = point.longitude
                     ele = point.elevation
-                    time = point.time
+                    tp_time = point.time
                     atemp = None
                     hr = None
                     if point.extensions is not None:
                         for extension in point.extensions:
                             if extension.tag.endswith("TrackPointExtension"):
-                                for child in extension.getchildren():
+                                for child in extension.iter():
                                     if child.tag.endswith("atemp"):
                                         atemp = child.text
                                     elif child.tag.endswith("hr"):
                                         hr = child.text
 
                     # Insert trackpoint data into Trackpoints table
-                    c.execute("INSERT INTO Trackpoints (track_id, lat, lon, ele, time, atemp, hr) VALUES (?, ?, ?, ?, ?, ?, ?)", (track_id, lat, lon, ele, time, atemp, hr))
+                    c.execute("INSERT INTO Trackpoints (track_id, lat, lon, ele, time, atemp, hr) VALUES (?, ?, ?, ?, ?, ?, ?)", (track_id, lat, lon, ele, tp_time, atemp, hr))
 
         # Commit changes and log success
         conn.commit()

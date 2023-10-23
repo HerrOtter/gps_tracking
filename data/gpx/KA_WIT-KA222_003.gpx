@@ -60,7 +60,7 @@
 <trkpt lat="50.526801" lon="3.208658"> <time>1917-04-28T00:00Z</time><name>Genech Schloßteich      </name> <src></src> </trkpt>           
 </trkseg>
 <trkseg>
-<trkpt lat="50.521129" lon="3.216377"> <time>1917-05-06T00:00Z</time><name>Genech                  </name> <src></src> </trkpt>           
+<trkpt lat="50.521129" lon="3.216377"> <time>1917-05-06T00:00Z</time><name>Genech                  </name> <src></src> </trkpt>    
 <trkpt lat="50.533879" lon="3.173467"> <time>1917-05-08T08:30Z</time><name>Templeuve               </name> <src></src> </trkpt>           
 <trkpt lat="50.638634" lon="3.076097"> <time>1917-05-08T00:00Z</time><name>Lille                   </name> <src></src> </trkpt>           
 <trkpt lat="50.686869" lon="3.179704"> <time>1917-05-08T00:00Z</time><name>Roubaix                 </name> <src></src> </trkpt>           

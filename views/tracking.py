@@ -6,25 +6,25 @@ from . import tracking_bp
 def tracking():
     if request.method == 'POST':
         # Get form data from request
-        name        = request.form['nick']
-        kennzeichen = request.form['kfz']
+        initials        = request.form['nick']
+        license_plate = request.form['kfz']
         #datefrom    = request.form['datefrom']
         #dateto      = request.form['dateto']
         
         # Connect to database and execute query
         conn    = sqlite3.connect('gps_tracking.db')
         c       = conn.cursor()
-        query   = '''SELECT tp.lat, tp.lon, tp.ele FROM person AS p
-                        INNER JOIN Tracks AS t ON t.person_id = p.id
-                        INNER JOIN Fahrzeug AS f on f.id = t.fahrzeug_id
-                        INNER JOIN Trackpoints AS tp ON tp.track_id = t.id
-                        WHERE p.name = ? AND f.kennzeichen = ?'''
-        c.execute(query, (name, kennzeichen))
+        query   = '''SELECT tp.latitude, tp.longitude, tp.elevation FROM person AS p
+                        INNER JOIN track        AS t    ON t.person_id  = p.id
+                        INNER JOIN vehicle      AS v    ON v.id         = t.vehicle_id
+                        INNER JOIN trackpoint   AS tp   ON tp.track_id  = t.id
+                        WHERE p.initials = ? AND v.license_plate = ? AND (SELECT is_valid FROM protocol WHERE is_valid = '1')'''
+        c.execute(query, (initials, license_plate))
         trackpoints = c.fetchall()
-        print(trackpoints)
+        for trackpoint in trackpoints:
+            print(trackpoint)
         conn.close()
 
         # Convert trackpoints to coordinates list and render template
         coordinates = [(track[0], track[1]) for track in trackpoints]
-        print(coordinates)
         return render_template('index.html', coordinates=coordinates)

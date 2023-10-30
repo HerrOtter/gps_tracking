@@ -1,7 +1,7 @@
 # app.py
 from flask import Flask, render_template
 from views.tracking import tracking_bp
-from views.import_gpx import import_gpx
+from models import function
 
 app = Flask(__name__)
 
@@ -10,9 +10,17 @@ app.register_blueprint(tracking_bp)
 
 @app.route('/')
 def home():
-    import_gpx()
+    function.create_tables()
+    tables_are_valid = function.test_created_tables()
+
+    if not tables_are_valid:
+        print("The tables were not created successfully. Please check the database and try again.")
+        exit()
+    else:
+        function.import_gpx_files()
     return render_template('index.html')
 
-if __name__ == '__main__':
+if __name__ == '__main__':       
     app.run(debug=True)
+
     

@@ -5,12 +5,11 @@ from models import function
 
 app = Flask(__name__)
 
-# Register the tracking blueprint
 app.register_blueprint(tracking_bp)
 
 @app.route('/')
 def home():
-    function.create_tables()
+    function.create_tracking_tables()
     tables_are_valid = function.test_created_tables()
 
     if not tables_are_valid:

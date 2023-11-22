@@ -2,7 +2,7 @@ import sqlite3
 import os
 import gpxpy
 
-def create_tables():    
+def create_tracking_tables():    
     conn = sqlite3.connect('gps_tracking.db')
     c = conn.cursor()
 
@@ -44,6 +44,10 @@ def create_tables():
     
     conn.close()
 
+def create_user_table():
+    conn = sqlite3.connect("user.db")
+    c = conn.cursor()
+    
 def test_created_tables():
     conn = sqlite3.connect('gps_tracking.db')
     c = conn.cursor()
@@ -183,7 +187,6 @@ def import_gpx_files():
     for filename in os.listdir('./data/gpx'):
         if filename.endswith('.gpx') and filename not in imported_files:
             gpx = parse_gpx_file('./data/gpx/' + filename)
-            #gpx = parse_gpx_file(os.path.join('./data/gpx', filename))
             person_initials         = extract_person_data(filename)
             person_id               = insert_person_data(c, person_initials)
             vehicle_license_plate   = extract_vehicle_data(filename)

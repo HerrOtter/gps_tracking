@@ -1,114 +1,69 @@
-/* Reset */
-
-* {
-    margin: 0rem;
-    padding: 0rem;
-}
-
-/* General */
-h1, p, label, input, button {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #fbfbfd;
-}
-
 body {
-    background-color: #fbfbfd;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: url('../static/images/trackpoints_with_route_on_tablet.jpeg') center/cover; /* Hintergrundbild zentriert und gestreckt */
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    width: 250px;
+    background-color: rgba(252, 252, 252, 0.85);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    font-size: 16px;
 }
 
 input {
-    padding: 1rem;
-    font-weight: 100;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #0B3570;
+    background-color: (252, 252, 252, 0.85);
+    border-radius: 4px;
+    color: black;
 }
 
-/* Header */
-
-header {
-    height: 3rem;
-    background-color: #1d1d1f;
-}
-
-header h1 {
-    color: #E8E8ED;
-    text-transform: uppercase;
-    padding: 0.30rem 0 0.15rem 1rem;
-}
-
-/* Wrapper */
-
-/* Section Upper */
-
-#upper {
-    height: 12rem;
-    width: 100%;
-    border-bottom: #1d1d1f thin solid;
-}
-
-#leftblock {
-    width: 30%;
-    display: inline-block;
-}
-
-.left {
-    display: block;
-    color: #1d1d1f;
-    margin: 0.25rem 2.5rem;
-    font-size: 1rem;
-}
-
-label.left {
-    margin-top: 0.5rem;
-}
-
-label.left, label.right {
-    font-weight: 600;
-}
-
-#rightblock {
-    display: inline-block;
-    width: 50%;
-    vertical-align: top; /* Anpassung */
-    margin-top: 2rem;
-}
-
-.right {
-    color: #1d1d1f;
-    font-size: 1rem;
-}
-
-input.right {
-    margin: 0 1.15rem 0 0.5rem;
-}
-
-#buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    bottom: 2rem;
-}
-
-#buttons button {
-    margin-right: 1rem
-}
-
-#upper button {
-    font-size: 1.25rem;
-    padding: 0.25rem 2.5rem;
-    background-color: #06c;
+button {
+    background-color: #176DE6;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
     border: none;
-    border-radius: 25px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-#upper button:hover {
-    background-color: #0077ED;
+button:hover {
+    background-color: #0F4999;
 }
 
-
-#lower {
-    height: 31.8rem;
+.register-link,
+.login-link {
+    text-align: center;
+    margin-top: 15px;
 }
 
-#map {
-    height: 100%;
+.register-link a,
+.login-link a {
+    color: #176DE6;
+    text-decoration: none;
+}
+
+.register-link a:hover,
+.login-link a:hover {
+    text-decoration: underline;
 }
